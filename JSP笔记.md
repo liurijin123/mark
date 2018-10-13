@@ -28,3 +28,6 @@
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/9IQSfPXbp.OpLQV44mG7QJxm6JDsSU6CUWwBxJZoy8Y!/b/dFQBAAAAAAAA&bo=2gWAAiAGngIDCcs!&rf=viewer_4)
 
 ## 2、request对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/QvAe777ofQVUD.C68axFXMhhNd7Fdke350VJiALlqx4!/b/dFMBAAAAAAAA&bo=QAYuAgAAAAADB0g!&rf=viewer_4)
+
+
