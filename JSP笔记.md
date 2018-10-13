@@ -54,3 +54,7 @@
 
 ## 9、exception对象
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/rdNHLYDS38lbWXv34qrGh8UrgOmcIadCTU5pK82nMKo!/b/dFMBAAAAAAAA&bo=RgaxAUYGsQEDCSw!&rf=viewer_4)
+
+# JSP中创建和使用Cookie
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/a9U.5oD5*81jX*8TSqeHUG15mpDT.WqFJNUe.dCKzcw!/b/dFIBAAAAAAAA&bo=GQW8ARkFvAEDCSw!&rf=viewer_4)
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/O5FlBG5IuyHEsfdBIqVeb*rbaZKfeukxbio29.OSfJo!/b/dDEBAAAAAAAA&bo=aQYiAmkGIgIDCSw!&rf=viewer_4)
