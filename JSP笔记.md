@@ -5,22 +5,28 @@
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/H20MRZhmHGyx2Cn*5yz*IX99q3GRhIldbxxrPA1JyyM!/b/dAsBAAAAAAAA&bo=GgNmARoDZgEDByI!&rf=viewer_4)
 
 **include指令：** 将一个外部文件嵌入到当前JSP文件中，同时解析这个页面中的JSP语句
-
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/jEtogrtC8L2xBMhDnahFDPBdd4w9GtpwlPj*GTUuD6U!/b/dFIBAAAAAAAA&bo=bQFSAG0BUgADCSw!&rf=viewer_4)
+![](http://a2.qpic.cn/psb?/V12X9A3m33wlIQ/TJoa7M5lDvjQD26KLkTXb9oYL.VtL9w2XDxhpFvW8NE!/b/dDEBAAAAAAAA&ek=1&kp=1&pt=0&bo=mAWAAmgG3QIDObI!&tl=1&vuin=1277646565&tm=1539432000&sce=60-2-2&rf=viewer_4)
 **taglib指令：** 使用标签库定义新的自定义标签，在JSP页面中启用定制行为
 
-## 2、注释
+## 2、动作
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/whpPX5PqqBiuhNSpuRBBfTI85L4vHYgN8xfe3Rb80BM!/b/dDQBAAAAAAAA&bo=IQZoAiEGaAIDSWw!&rf=viewer_4)
+****
+****
+****
+## 3、注释
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/GrDELDNDHPQJov7DtUzAEf6k0BaGUlStaAClsK*E5jc!/b/dDABAAAAAAAA&bo=IwOzAQAAAAADB7A!&rf=viewer_4)
 
-## 3、JSP脚本
+## 4、JSP脚本
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/z2LNUrmzpOFIB0RgZQz8Y5snmF96mIu0bMgOaZcXTYs!/b/dFQBAAAAAAAA&bo=7gKaAAAAAAADB1Q!&rf=viewer_4)
 
-## 4、JSP声明
+## 5、JSP声明
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/Rq8YxmsHLwy8uv.zC33WgvFtkznOspvoMUT6yEt6DKA!/b/dDUBAAAAAAAA&bo=7AKRAAAAAAADB10!&rf=viewer_4)
 
-## 5、JSP表达式
+## 6、JSP表达式
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/pDCqtLvlic.ZYUAl3qoqA4bQXOzT3qkBUv3pzvxjvqU!/b/dFIBAAAAAAAA&bo=7QKYAAAAAAADB1U!&rf=viewer_4)
 
-## 6、JSP页面的生命周期
+## 7、JSP页面的生命周期
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/DuEOfjqOoXp7VWcXVV2O68642BXMTNFkmS7r9IDsM68!/b/dDEBAAAAAAAA&bo=lANkAQAAAAADB9A!&rf=viewer_4)
 
 # 二、JSP内置对象
@@ -58,3 +64,4 @@
 # JSP中创建和使用Cookie
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/a9U.5oD5*81jX*8TSqeHUG15mpDT.WqFJNUe.dCKzcw!/b/dFIBAAAAAAAA&bo=GQW8ARkFvAEDCSw!&rf=viewer_4)
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/O5FlBG5IuyHEsfdBIqVeb*rbaZKfeukxbio29.OSfJo!/b/dDEBAAAAAAAA&bo=aQYiAmkGIgIDCSw!&rf=viewer_4)
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/mVv3apwYp3spiG*SyEHZwM1uoq6A1LzcNc00*f*Ol2Y!/b/dC0BAAAAAAAA&bo=PQXBAj0FwQIDCSw!&rf=viewer_4)
