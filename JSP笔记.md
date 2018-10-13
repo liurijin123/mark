@@ -53,4 +53,3 @@
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/b8RLPam84kUldXGx9rWe7H0K8ijez9QKDH89zHmpmoE!/b/dDUBAAAAAAAA&bo=WwZ*AQAAAAADBwE!&rf=viewer_4)
 
 ## 9、exception对象
-![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/j.y1fZ9G8oa4*2OCShUVw3s0JvBe9BL2WyfoxyckuAo!/b/dFkAAAAAAAAA&bo=RgasAQAAAAADB88!&rf=viewer_4)
