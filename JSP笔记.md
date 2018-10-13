@@ -30,4 +30,10 @@
 ## 2、request对象
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/QvAe777ofQVUD.C68axFXMhhNd7Fdke350VJiALlqx4!/b/dFMBAAAAAAAA&bo=QAYuAgAAAAADB0g!&rf=viewer_4)
 
+## 3、response对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/EtUjdgyjN8JrBJsxYXQIlenh10sXt7CIijU8Asin0t0!/b/dC4BAAAAAAAA&bo=MAYaAjAGGgIDCSw!&rf=viewer_4)
 
+## 4、session对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/dF41KeZynrhvmmjUH6KawnGXKUO**Tz43Dt*MrxiI7E!/b/dC8BAAAAAAAA&bo=SwZrAQAAAAADBwU!&rf=viewer_4)
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/NXHx0L0yqO95ygoxO*D5fkB5DHp52kuLGr*YzfRKa0A!/b/dFIBAAAAAAAA&bo=SQZSAgAAAAADBz0!&rf=viewer_4)
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/hpN6HU0gXk0s8kFq5mQfBocVBQVgYVHzgsznQzNc.rs!/b/dDUBAAAAAAAA&bo=pAazAgAAAAADBzE!&rf=viewer_4)
