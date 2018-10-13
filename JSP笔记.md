@@ -37,3 +37,20 @@
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/dF41KeZynrhvmmjUH6KawnGXKUO**Tz43Dt*MrxiI7E!/b/dC8BAAAAAAAA&bo=SwZrAQAAAAADBwU!&rf=viewer_4)
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/NXHx0L0yqO95ygoxO*D5fkB5DHp52kuLGr*YzfRKa0A!/b/dFIBAAAAAAAA&bo=SQZSAgAAAAADBz0!&rf=viewer_4)
 ![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/hpN6HU0gXk0s8kFq5mQfBocVBQVgYVHzgsznQzNc.rs!/b/dDUBAAAAAAAA&bo=pAazAgAAAAADBzE!&rf=viewer_4)
+
+## 5、application对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/BC3WXtd2Uq9CaQ68Ti4yYIcRY6VeCkeLO1sGY1AdWW4!/b/dDUBAAAAAAAA&bo=KwaLAQAAAAADB4U!&rf=viewer_4)
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/xlq3*zeCvLbCepoUR51txW*qZMdRKl78AupzDiCzVrU!/b/dDABAAAAAAAA&bo=rQXSAQAAAAADB1k!&rf=viewer_4)
+
+## 6、page对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/vCIJlh5LYmbetzjAyQQUT5JRehmDnyl7rJNK6gugaFM!/b/dFIBAAAAAAAA&bo=RgaeAgAAAAADB*4!&rf=viewer_4)
+
+## 7、pageContext对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/KbwDzWutrOghJq97q7sCS2gG2xQPDvNGaNlwdoqEXIY!/b/dDIBAAAAAAAA&bo=gwUOAQAAAAADB6s!&rf=viewer_4)
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/TV5fvgZLx7ewl6p2Zfzq6E6s657wDkbll7TXKbeC7bY!/b/dFMBAAAAAAAA&bo=KQZ8AgAAAAADB3M!&rf=viewer_4)
+
+## 8、config对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/b8RLPam84kUldXGx9rWe7H0K8ijez9QKDH89zHmpmoE!/b/dDUBAAAAAAAA&bo=WwZ*AQAAAAADBwE!&rf=viewer_4)
+
+## 9、exception对象
+![](http://m.qpic.cn/psb?/V12X9A3m33wlIQ/j.y1fZ9G8oa4*2OCShUVw3s0JvBe9BL2WyfoxyckuAo!/b/dFkAAAAAAAAA&bo=RgasAQAAAAADB88!&rf=viewer_4)
