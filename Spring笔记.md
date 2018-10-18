@@ -26,25 +26,92 @@ public class SpringConfig(){
 ```
 ## 构造器注入和Setter方法注入
 ### 构造器注入
+属性类
+```
+public class SpringAction {
+    //注入对象springDao
+    private String name;
+    private int salary;
+    private User user;
+    
+    //此处必须提供含参数的构造函数用于注入相关属性
+    public SpringAction(String name,int salary,User user){
+        this.name = name;
+        this.salary = salary;
+        this.user = user;
+        System.out.println("构造方法调用属性");
+    }
+        
+        public void save(){
+        ...
+    }
+}
+```
 + \<constructor-arg\>元素
 ```
-<bean id="user" class="fun.liutong.controller.UserController">
-    <constructor-arg ref="userService" />
+<!--配置bean,配置后该类由spring管理-->
+<bean name="user" class="com.bless.springdemo.vo.User"></bean>
+
+--很久参数索引赋值--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <constructor-arg index="0" value="刘通" />
+     <constructor-arg index="1" value="3500" />
+     <constructor-arg index="2" ref="user"/>
 </bean>
-```
-如果构造器带参数,使用value属性，通过该属性表明给定的值要字面量的形式注入到构造器中。
-```
-<bean id="user" class="fun.liutong.controller.UserController">
-    <constructor-arg value="name" />
-    <constructor-arg value="age />
+
+--根据参数类型赋值--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <constructor-arg type="Java.lang.String" value="刘通" />
+     <constructor-arg type="java.lang.Intager" value="3500" />
+     <constructor-arg type="com.bless.springdemo.vo.User" ref="user"/>
+</bean>
+
+--根据参数名称赋值--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <constructor-arg name="name" value="刘通" />
+     <constructor-arg name="salary" value="3500" />
+     <constructor-arg name="user" ref="user"/>
+</bean>
+
+--按照参数顺序直接赋值（value）--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <constructor-arg value="刘通" />
+     <constructor-arg value="3500" />
+     <constructor-arg ref="user"/>
 </bean>
 ```
 + 使用Spring 3.0所引入的c-命名空间
 ```
-<bean id="user" class="fun.liutong.controller.UserController" 
-        c:name-ref="userService"/>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/c"       ////使用命名空间时，注意头文件这里要多出这一行
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<!--配置bean,配置后该类由spring管理-->
+<bean name="user" class="com.bless.springdemo.vo.User"></bean>
+
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction" 
+      c:name-value="刘通" 
+      c:salary-value="2300"
+      c:user-ref="user"/>
+
+--也可以这样使用ref属性--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction" 
+      c:_-ref="user"/>    
+
+--当只使用value属性时可以这样--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction" 
+      c:_value="刘通" 
+      c:_salary="2300"/>
+--使用index--      
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction" 
+      c:_0="刘通" 
+      c:_1="2300"/>
+</beans>
 ```
-c: 命名空间前缀  name 构造器参数  
 ## 装配Bean
 ### 在XML中进行显式装配
 在基于XML的Spring配置中声明一个Bean，使用\<bean\>标签。
