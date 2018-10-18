@@ -285,5 +285,3 @@ public class BeanConfig {
 自动装配就是让Spring自动满足Bean依赖的方法，在满足依赖过程中，会在Spring应用上下文中寻找匹配某个Bean需求的其他Bean,可以使用Spring的@Autowired注解。
 
 如果没有匹配到Bean，Spring会抛出一个异常，可以将@Autowired的required属性设置为false：@Autowired(required=false)。
-
-# 三、控制Bean的创建和销毁
