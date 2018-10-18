@@ -1,6 +1,26 @@
-# 装配Bean
-## 声明Bean
-### 使用注解的
+# 声明Bean
+通过Spring创建的对象默认是单例的，如果需要创建多实例对象可以在\<bean\>标签后面添加一个属性：
+```
+<bean name="..." class="..." scope="prototype">  
+```
+## 在XML中进行显式声明
+在基于XML的Spring配置中声明一个Bean，使用\<bean\>标签。
+```
+<bean id="user" class="fun.liutong.pojo.User" />
+```
+## 在java中进行显式声明
+添加@Configuration注解表明这个类是一个配置类。
+```
+@Configuration
+@ComponentScan //开启组件扫描
+public class SpringConfig(){
+    @Bean(name="自定义Bean ID")
+    public User user(){
+        return new User();
+    }
+}
+```    
+## 使用注解声明
 + @Component
 + @service
 + @controller
@@ -24,7 +44,9 @@ public class SpringConfig(){
 ```
 <context:component-scan base-package="包名" />
 ```
-## 构造器注入和Setter方法注入
+
+# 装配Bean（依赖注入）
+## 在XML中进行显式装配
 ### 构造器注入
 属性类
 ```
@@ -232,30 +254,13 @@ public class SpringAction {
       
 </beans>
 ```
-## 装配Bean
-### 在XML中进行显式装配
-在基于XML的Spring配置中声明一个Bean，使用\<bean\>标签。
-```
-<bean id="user" class="fun.liutong.pojo.User" />
-```
+## 在java中进行显示装配
 
-### 在java中进行显示装配
-添加@Configuration注解表明这个类是一个配置类。
-```
-@Configuration
-@ComponentScan //开启组件扫描
-public class SpringConfig(){
-    @Bean(name="自定义Bean ID")
-    public User user(){
-        return new User();
-    }
-}
-```
-### 隐式的Bean发现机制和自动装配
+## 隐式的Bean发现机制和自动装配
 + @Autowired
 + @Inject   (来源于Java依赖注入规范)
 自动装配就是让Spring自动满足Bean依赖的方法，在满足依赖过程中，会在Spring应用上下文中寻找匹配某个Bean需求的其他Bean,可以使用Spring的@Autowired注解。
 
 如果没有匹配到Bean，Spring会抛出一个异常，可以将@Autowired的required属性设置为false：@Autowired(required=false)。
 
-## 控制Bean的创建和销毁
+# 控制Bean的创建和销毁
