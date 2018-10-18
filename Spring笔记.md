@@ -112,6 +112,126 @@ public class SpringAction {
       c:_1="2300"/>
 </beans>
 ```
+### Setter方法注入
+属性类：
+```
+public class SpringAction {
+    //注入对象springDao
+    private String name;
+    private int salary;
+    private User user;
+    
+    //此处一定要有属性的setter方法
+    public void setName(String name) { 
+        this.name = name; 
+    } 
+    
+    public void setSalary(Salary salary) { 
+        this.salary = salary; 
+    } 
+    
+    public void setUser(User user) { 
+        this.user = user; 
+    } 
+        
+        public void save(){
+        ...
+    }
+}
+```
++ 使用\<property\>标签
+```
+<!--配置bean,配置后该类由spring管理-->
+<bean name="user" class="com.bless.springdemo.vo.User"></bean>
+
+--很久参数索引赋值--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <property index="0" value="jane"/>
+     <property index="1" value="3500" />
+     <property index="2" ref="user"/>
+</bean>
+
+--根据参数类型赋值--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <property type="Java.lang.String" value="刘通" />
+     <property type="java.lang.Intager" value="3500" />
+     <property type="com.bless.springdemo.vo.User" ref="user"/>
+</bean>
+
+--根据参数名称赋值--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <property name="name" value="刘通" />
+     <property name="salary" value="3500" />
+     <property name="user" ref="user"/>
+</bean>
+
+--按照参数顺序直接赋值（value）--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <property value="刘通" />
+     <property value="3500" />
+     <property ref="user"/>
+</bean>
+```
++ 集合对象注入  
+```
+<!--配置bean,配置后该类由spring管理-->
+<bean name="user" class="com.bless.springdemo.vo.User"></bean>
+
+--注入list参数--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <property index="0">
+        <list>
+            <value>小红</value>
+            <value>小明</value>
+            <value>小刚</value>
+        </list>
+     </property>
+</bean>
+
+--在list中引用bean--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <property index="0">
+        <list>
+            <ref bean="user"/>
+            <ref bean="student"/>
+        </list>
+     </property>
+</bean>
+
+--注入map参数--
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction">
+     <property name="map">
+        <map>
+            <entry key="name" value="小明"/>
+            <entry key="name" value="小红"/>
+            <entry key="name" value="小刚"/>
+        </map>
+     </property>
+</bean>
+
+--null注入--
+<property name="wife"><null/></property>
+```
++ p命名空间注入
+```
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"       ////使用命名空间时，注意头文件这里要多出这一行
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<!--配置bean,配置后该类由spring管理-->
+<bean name="user" class="com.bless.springdemo.vo.User"></bean>
+
+<bean name="springAction" class="com.bless.springdemo.action.SpringAction" 
+      p:name="小明" 
+      c:salary="2300"
+      c:user-ref="user"/>
+      
+</beans>
+```
 ## 装配Bean
 ### 在XML中进行显式装配
 在基于XML的Spring配置中声明一个Bean，使用\<bean\>标签。
