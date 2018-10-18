@@ -255,7 +255,30 @@ public class SpringAction {
 </beans>
 ```
 ## 2、在java中进行显示装配
+```
+@Configuration
+public class BeanConfig {
 
+    @Bean
+    public User user() {
+
+        return new User();
+    }
+
+    @Bean
+    public ServiceUser serviceUser() {
+
+       ServiceUser serviceUser = new ServiceUser();
+       serviceUser.setUser(user()); //通过调用bean的setter方法来注入
+       return serviceUser;
+    }
+    
+     @Bean
+    public CotrollerUser cotrollerUser(ServiceUser serviceUser) {
+       return new CotrollerUser(serviceUser); //通过构造方法来注入
+    }
+}
+```
 ## 3、隐式的Bean发现机制和自动装配
 + @Autowired
 + @Inject   (来源于Java依赖注入规范)
