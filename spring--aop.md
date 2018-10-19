@@ -2,7 +2,16 @@
 + AOP：Aspect Oriented Programming的缩写，通过预编译方式和运行期动态代
 理实现程序功能的统一维护的一种技术
 + 主要功能是：日记记录、性能统计、安全控制、事务处理、异常处理等
-## AOP专业术语
+## 一、AOP实现方式
++ 预编译
+AspectJ
++ 运行期动态代理（JDK动态代理、CGLib动态代理）
+SpringAOP、JbossAOP
+### SpringAop
++ 纯Java实现，无需特殊的编译过程
++ Spring AOP默认使用标准的JavaSE动态代理作为AOP代理，这使得任何接口(或者接口集)都可以被代理
++ Spring AOP中也可以使用CGLIB代理(如果一个业务对象并没有实现一个接口)
+## 二、AOP专业术语
 名称|说明
 ---|---
 切面(Aspect)|一个关注点的模块化，这个关注点可能会横切多个对象
@@ -13,25 +22,8 @@
 目标对象(Target Object)|被一个或者多个切面通知的对象
 AOP代理(AOP Proxy)|Aop框架创建的对象，用来实现切面契约(aspect contract)(包括通知方法执行等功能)
 织入(Weaving)|把切面连接到其他的应用程序类型或对象上，并创建一个被通知的对象，分为：编译时织入、类加载时织入、执行时织入
-### Advice的类型
-名称|说明
----|---
-前置通知(Before advice)|在某连接点(join point)之前执行的通知，但不能阻止连接点之前的执行，除非它抛出一个异常
-返回后通知(After returning advice)|在某连接点(join point)正常完成后执行的通知
-抛出异常后通知(After throwing)|在方法抛出异常退出时执行的通知
-后通知(After advice)|当某连接点退出的时候执行的通知(不论是正常返回还是异常退出)
-环绕通知(Around Advice)|包围一个连接点(join point)的通知
-## AOP实现方式
-+ 预编译
-AspectJ
-+ 运行期动态代理（JDK动态代理、CGLib动态代理）
-SpringAOP、JbossAOP
-### SpringAop
-+ 纯Java实现，无需特殊的编译过程
-+ Spring AOP默认使用标准的JavaSE动态代理作为AOP代理，这使得任何接口(或者接口集)都可以被代理
-+ Spring AOP中也可以使用CGLIB代理(如果一个业务对象并没有实现一个接口)
-# 配置
-## 通过XML配置切面aspect
+### 1、切面Aspect
++ 通过XML配置切面aspect
 ```
 <aop:config>
   <aop:aspect id="myAspect" ref="aBean">  //把aBean做为一个切面来声明
@@ -42,12 +34,17 @@ SpringAOP、JbossAOP
   ...
 </bean>
 ```
-## 通过XML配置切入点pointcut
-+ execution(public * *(..))  切入点为执行所有的public方法时
-+ execution(* set*(..))  切入点为执行所有set开始的方法时
-+ execution(* fun.liutong.service.UserService.*(..))  切入点为执行UserService类中的所有
-+ execution(* fun.liutong.service..(..))  切入点为执行fun.liutong.service包下的所有方法时
-+ execution(* fun.liutong.service...(..))  切入点为执行fun.liutong.service包及其包下的所有方法时
+### 2、连接点Joinpoint
+execution(public * *(..))  切入点为执行所有的public方法时
+
+execution(* set*(..))  切入点为执行所有set开始的方法时
+
+execution(* fun.liutong.service.UserService.*(..))  切入点为执行UserService类中的所有
+
+execution(* fun.liutong.service..(..))  切入点为执行fun.liutong.service包下的所有方法时
+
+execution(* fun.liutong.service...(..))  切入点为执行fun.liutong.service包及其包下的所有方法时
++ 通过XML配置切入点pointcut
 ```
 <aop:config>
   <aop:aspect id="myAspect" ref="aBean">  //把aBean做为一个切面来声明
@@ -58,7 +55,16 @@ SpringAOP、JbossAOP
 </aop:config>
 <bean id="aBean" class="...">
 ```
-## 通过XML配置通知Advice
+### 3、通知Advice
++ 通知Advice的类型
+名称|说明
+---|---
+前置通知(Before advice)|在某连接点(join point)之前执行的通知，但不能阻止连接点之前的执行，除非它抛出一个异常
+返回后通知(After returning advice)|在某连接点(join point)正常完成后执行的通知
+抛出异常后通知(After throwing)|在方法抛出异常退出时执行的通知
+后通知(After advice)|当某连接点退出的时候执行的通知(不论是正常返回还是异常退出)
+环绕通知(Around Advice)|包围一个连接点(join point)的通知
++ 通过XML配置通知Advice
 ```
 <aop:config>
   <aop:aspect id="myAspect" ref="aBean">  //把aBean做为一个切面来声明
@@ -77,3 +83,5 @@ SpringAOP、JbossAOP
 </aop:config>
 <bean id="aBean" class="...">
 ```
+
+
