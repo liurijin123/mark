@@ -34,7 +34,8 @@ AOP代理(AOP Proxy)|Aop框架创建的对象，用来实现切面契约(aspect 
   ...
 </bean>
 ```
-### 2、连接点Joinpoint
+### 2、切入点pointcut
++ 连接点
 execution(public * *(..))  切入点为执行所有的public方法时
 
 execution(* set*(..))  切入点为执行所有set开始的方法时
