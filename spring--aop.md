@@ -85,5 +85,15 @@ execution(* fun.liutong.service...(..))  切入点为执行fun.liutong.service�
 </aop:config>
 <bean id="aBean" class="...">
 ```
-
+### 4、引入Introdutions
+允许一个切面声明一个实现指定接口的通知对象，并且提供一个接口实现类代表这些对象
++ 通过XML配置引入Introdutions
+```
+<aop:aspect id="myAspect" ref="aBean">
+  <aop:declare-parents
+    types-matching="fun.liutong.service.UserService(+)"
+    implement-interface="fun.liutong.service.UserInter"
+    default-impl="fun.liutong.service.UserImp" />
+</aop:aspect>
+```
 
