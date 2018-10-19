@@ -57,6 +57,7 @@ execution(* fun.liutong.service...(..))  切入点为执行fun.liutong.service�
 ```
 ### 3、通知Advice
 + 通知Advice的类型
+
 名称|说明
 ---|---
 前置通知(Before advice)|在某连接点(join point)之前执行的通知，但不能阻止连接点之前的执行，除非它抛出一个异常
@@ -64,6 +65,7 @@ execution(* fun.liutong.service...(..))  切入点为执行fun.liutong.service�
 抛出异常后通知(After throwing)|在方法抛出异常退出时执行的通知
 后通知(After advice)|当某连接点退出的时候执行的通知(不论是正常返回还是异常退出)
 环绕通知(Around Advice)|包围一个连接点(join point)的通知
+
 + 通过XML配置通知Advice
 ```
 <aop:config>
