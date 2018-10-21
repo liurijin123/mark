@@ -58,3 +58,10 @@ public class MyObject {
 A线程先持有object对象的Lock锁，B线程如果在这个时候调用对象中的同步 (synchronized)方法则需等待，也就是同步 
 
 A线程先持有0bject对象的Lock锁，B线程可以以异步的方式调用对象中的非 synchronized修饰的方法
+## synchronized的实现原理
+JVM基于进入和推出Monutor对象来实现方法同步和代码块同步，但两者的实现细节不同。代码块同步是使用monitorenter和monitorexit指令实现，而方法同步
+则是使用另外一种方式实现，但是，方法的同步同样可以使用这两个指令来实现
+
+monitortnter指令是在编译后插入到同步方法块的开始位置,而monitorexit是插入到方法结束处和异常处，JVM要保证每个monitorenter和monitorexit配对。
+任何一个对象都有一个monitor与之关联，而且一个monitor被持有后，它将处于锁定状态。线程执行到monitorenter指令时，将会尝试获取对象所对应的monitor
+的所有权，即尝试获得对象的锁。
