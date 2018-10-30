@@ -154,3 +154,122 @@ t1等待通知
 t2发出通知
 t1收到通知
 ```
+## ReentrantReadWriteLock(读写锁)
+      读写锁ReentrantReadWriteLock，其核心就是实现读写分离的锁。在高并发访问下，尤其是读多写少的情况下，性能要远高于重入锁。
+
+      之前学synchronized、ReentrantLock时，我们知道，同一时间内，只能有一个线程进行访问被镇定的代码，那么读写锁则不同，其本质是分成两个锁，即读锁、写锁。在读锁下，多个线程可以并发的进行访问，但是在写锁的时候，只能一个一个的顺序访问。
+
+口诀：读读共享，写写互斥，读写互斥。
+案例：
+```
+package lock;
+
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
+
+public class UseReentrantReadWriteLock {
+
+	private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
+    private ReadLock readLock = rwLock.readLock();
+    private WriteLock writeLock = rwLock.writeLock();
+    
+    public void read(){
+        try {
+            readLock.lock();
+            System.out.println("当前线程:" + Thread.currentThread().getName() + "进入...");
+            Thread.sleep(3000);
+            System.out.println("当前线程:" + Thread.currentThread().getName() + "退出...");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    public void write(){
+        try {
+            writeLock.lock();
+            System.out.println("当前线程:" + Thread.currentThread().getName() + "进入...");
+            Thread.sleep(3000);
+            System.out.println("当前线程:" + Thread.currentThread().getName() + "退出...");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public static void main(String[] args) {
+
+        final UseReentrantReadWriteLock urrw = new UseReentrantReadWriteLock();
+
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                urrw.read();
+            }
+        }, "t1");
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                urrw.read();
+            }
+        }, "t2");
+        Thread t3 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                urrw.write();
+            }
+        }, "t3");
+        Thread t4 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                urrw.write();
+            }
+        }, "t4");       
+
+        //读读共享
+        t1.start();
+        t2.start();
+
+        //读写互斥
+//      t1.start(); // R
+//      t3.start(); // W
+
+        //写写互斥
+//      t3.start();
+//      t4.start();
+
+
+    }
+}
+```
+输出结果：
+
+当启动 t1 , t2 时 打印结果为：
+```
+当前线程:t2进入...
+当前线程:t1进入...
+当前线程:t2退出...
+当前线程:t1退出...
+```
+如果你注意观看打印结果，发现t1 , t2同时打印，这也是是我们口诀中的“读读共享”。
+
+当启动 t1 , t3 时 打印结果为：
+```
+当前线程:t1进入...
+当前线程:t1退出...
+当前线程:t3进入...
+当前线程:t3退出...
+```
+如果你注意观看打印结果，发现t1线程执行完后，t3线程才开始执行，这也是是我们口诀中的“读写互斥”。
+
+当启动 t3 , t4 时 打印结果为：
+```
+当前线程:t3进入...
+当前线程:t3退出...
+当前线程:t4进入...
+当前线程:t4退出...
+```
+如果你注意观看打印结果，发现t3线程执行完后，t4线程才开始执行，这也是是我们口诀中的“写写互斥”。
