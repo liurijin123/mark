@@ -94,6 +94,72 @@ public class Test {
 ## 2.CountDownLacth的使用 
 >他经常用于监听某些初始化操作，等初始化执行完毕后，通知主线程继续工。
 区别：CyclicBarrier所有线程都阻塞；CountDownLatch只有一个(主)线程阻塞等待
+案例：
+```
+package concurrent;
+
+import java.util.concurrent.CountDownLatch;
+
+public class UseCountDownLatch {
+
+	public static void main(String[] args) {
+		final CountDownLatch countDown = new CountDownLatch(2);
+		Thread t1 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {		
+				try {
+					System.out.println("进入线程1，等待其他线程初始化完成");
+					countDown.await();
+					System.out.println("线程1收到通知，继续执行");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "t1");
+		Thread t2 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {	
+				try {
+					System.out.println("线程2进行初始化操作");
+					Thread.sleep(3000);
+					System.out.println("线程2初始化完成");
+					countDown.countDown();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}		
+			}
+		}, "t2");
+		Thread t3 = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					System.out.println("线程3进行初始化操作");
+					Thread.sleep(3000);
+					System.out.println("线程3初始化完成");
+					countDown.countDown();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "t3");
+		t1.start();
+		t2.start();
+		t3.start();
+	}
+}
+```
+输出结果：
+```
+线程3进行初始化操作
+进入线程1，等待其他线程初始化完成
+线程2进行初始化操作
+线程3初始化完成
+线程2初始化完成
+线程1收到通知，继续执行
+```
 ## 3.Callable和Future的使用
 >Future是一个设计模式，可以实现异步获取数据的。Future模式是非常合适在处理耗时很长的业务逻辑时进行使用，可以有效的减少系统的响应时间，提高系统的吞吐量。
 ## 4.Semaphore（计算信号量）的使用
