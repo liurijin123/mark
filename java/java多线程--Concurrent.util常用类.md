@@ -247,7 +247,59 @@ public FutureTask(Runnable runnable, V result) {
 }
 ```
 事实上，FutureTask是Future接口的一个唯一实现类。
-案例：
+案例：假设我们现在有一个任务，要计算出1-10000之间的所有数字的和，为了提升计算速度，我们使用两个线程，第一个线程计算1-5000的和，另外有一个线程计算5001-10000之间的数字的和。
+```
+package concurrent;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+
+public class UseFuture {
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		ExecutorService executor = Executors.newCachedThreadPool();
+		AndNumTask task1 = new AndNumTask(0, 5000);
+		AndNumTask task2 = new AndNumTask(5001, 10000);
+		FutureTask<Integer> future1 = new FutureTask<Integer>(task1);
+		FutureTask<Integer> future2 = new FutureTask<Integer>(task2);
+		executor.submit(future1);
+		executor.submit(future2);
+		executor.shutdown();
+		while(true){
+			if(future1.isDone() && !future1.isCancelled() && future2.isDone() && !future2.isCancelled()){
+				int sum = future1.get() + future2.get();
+				System.out.println(sum);
+				break;
+			}
+			else{
+				Thread.sleep(100);
+			}
+		}
+	}	
+}
+class AndNumTask implements Callable<Integer>{
+
+	private int start;
+	private int end;
+	public AndNumTask(int start,int end){
+		this.start = start;
+		this.end = end;
+	}
+	@Override
+	public Integer call() throws Exception {
+		int sum = 0;
+		for(int i=start;i<=end;i++){
+			sum += i; 
+		}
+		Thread.sleep(5000);
+		return sum;
+	}	
+}
+```
+输出结果：
+>50005000
 ## 4.Semaphore（计算信号量）的使用
 >官网API解释：计数信号量。从概念上讲，一个信号量维护一组允许。每个 acquire()块如果必要的许可证前，是可用的，然后把它。每个 release()添加许可，潜在收购方释放阻塞。然而，不使用实际允许的对象； Semaphore只是计数的数量和相应的行为。 
 信号量通常是用来限制线程的数量比可以访问一些（物理或逻辑）资源。
@@ -264,3 +316,107 @@ QPS （Query Per Second）即每秒查询数，qps很大程度上代表了业务
 RT （Response Time）即请求的响应时间，这个指标非常关键，直接说明前端用户的体验，因此任何系统设计师都想降低RT时间。
 
 当然还涉及cpu，内存，网络，磁盘等情况，细节问题很多。如select,updata,delete等数据层的操作。
+
+容量评估：一般来说通过开发、运维、测试、以及业务等相关人员．綜合出系统的一系列阈值，然后我们根据关键阈值如qps、rt等，对系统讲行有效的变更。一般来讲．我们讲行多轮压力测试以后，可以对系统讲行峰值评估，采用所谓的80/20原则，即80％的访网请求将在20％的时间内达到。这样我们可以根据系统对应PV计算出峰值 qps。
+
+峰值qps= (总PV ×80％）/（60 × 60× 24 ×20％）
+
+然后在将总的峰值qps除以单台机器所能承受的最高的qps值，就是所需要机器的数量：机器数=总的峰值qps /压测得出的单机极限qps
+
+当然不排除系统在上线前进行大型促销活动，或者双十一、双十二热点事件、遭受到DDos攻击等情况，系统的开发和运维人员急需要了解当前系统运行的状态和负载情况，一般都会有后台系统去维护。
+
+Semaphone可以控制系统的流量: 
+拿到信号量的线程可以讲入，否则就等待.通过acquire()和rekease()获取和释放访同许可。
+案例：
+```
+package concurrent;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+
+public class UseSemaphore {
+
+	public static void main(String[] args) {
+		// 线程池
+		ExecutorService exec = Executors.newCachedThreadPool();
+		// 只能5个线程同时访问
+		final Semaphore semp = new Semaphore(5);
+		// 模拟20个客户端访问
+		for (int index = 0; index < 20; index++) {
+			final int NO = index;
+			Runnable run = new Runnable() {
+				public void run() {
+					try {
+						// 获取许可
+						semp.acquire();
+						System.out.println("Accessing: " + NO + "获得许可");
+						// 模拟实际业务逻辑
+						Thread.sleep((long) (Math.random() * 10000));
+						// 访问完后，释放
+						System.out.println("Accessing: " + NO + "释放许可");
+						semp.release();
+					} catch (InterruptedException e) {
+					}
+				}
+			};
+			exec.execute(run);
+		}
+
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		// System.out.println(semp.getQueueLength());
+
+		// 退出线程池
+		exec.shutdown();
+	}
+
+}
+```
+输出结果：
+```
+Accessing: 0获得许可
+Accessing: 2获得许可
+Accessing: 3获得许可
+Accessing: 1获得许可
+Accessing: 5获得许可
+Accessing: 1释放许可
+Accessing: 4获得许可
+Accessing: 5释放许可
+Accessing: 6获得许可
+Accessing: 3释放许可
+Accessing: 7获得许可
+Accessing: 0释放许可
+Accessing: 8获得许可
+Accessing: 2释放许可
+Accessing: 9获得许可
+Accessing: 6释放许可
+Accessing: 10获得许可
+Accessing: 8释放许可
+Accessing: 11获得许可
+Accessing: 7释放许可
+Accessing: 12获得许可
+Accessing: 9释放许可
+Accessing: 13获得许可
+Accessing: 12释放许可
+Accessing: 14获得许可
+Accessing: 4释放许可
+Accessing: 15获得许可
+Accessing: 13释放许可
+Accessing: 16获得许可
+Accessing: 14释放许可
+Accessing: 17获得许可
+Accessing: 15释放许可
+Accessing: 18获得许可
+Accessing: 10释放许可
+Accessing: 19获得许可
+Accessing: 11释放许可
+Accessing: 19释放许可
+Accessing: 18释放许可
+Accessing: 16释放许可
+Accessing: 17释放许可
+```
