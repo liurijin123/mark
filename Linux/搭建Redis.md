@@ -40,83 +40,65 @@ mkdir -p /usr/local/redis/etc
 ```
 #!/bin/sh
 #
-# redis        Startup script for Redis Server
-#
-# chkconfig: - 80 12
-# description: Redis is an open source, advanced key-value store.
-#
-# processname: redis-server
-# config: /usr/local/redis/etc/redis.conf
-# pidfile: /var/run/redis.pid
-source /etc/init.d/functions
-BIN="/usr/local/redis/bin"
-CONFIG="/usr/local/redis/etc/redis.conf"
-PIDFILE="/var/run/redis.pid"
-### Read configuration
-[ -r "$SYSCONFIG" ] && source "$SYSCONFIG"
-RETVAL=0
-prog="redis-server"
-desc="Redis Server"
-start() {
-        if [ -e $PIDFILE ];then
-             echo "$desc already running...."
-             exit 1
-        fi
-        echo -n $"Starting $desc: "
-        daemon $BIN/$prog $CONFIG
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
-        return $RETVAL
-}
-stop() {
-        echo -n $"Stop $desc: "
-        killproc $prog
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$prog $PIDFILE
-        return $RETVAL
-}
-restart() {
-        stop
-        start
-}
+# Simple Redis init.d script conceived to work on Linux systems
+# chkconfig: 2345 90 10 
+# description: Redis is a persistent key-value database
+# as it does use of the /proc filesystem.
+
+REDISPORT=6379
+EXEC=/usr/local/redis/bin/redis-server
+CLIEXEC=/usr/local/redis/bin/redis-cli
+
+PIDFILE=/var/run/redis.pid
+CONF=/usr/local/redis/etc/redis.conf
+
 case "$1" in
-  start)
-        start
+    start)
+        if [ -f $PIDFILE ]
+        then
+                echo "$PIDFILE exists, process is already running or crashed"
+        else
+                echo "Starting Redis server..."
+                $EXEC $CONF
+        fi
         ;;
-  stop)
-        stop
+    stop)
+        if [ ! -f $PIDFILE ]
+        then
+                echo "$PIDFILE does not exist, process is not running"
+        else
+                PID=$(cat $PIDFILE)
+                echo "Stopping ..."
+                $CLIEXEC -p $REDISPORT shutdown
+                while [ -x /proc/${PID} ]
+                do
+                    echo "Waiting for Redis to shutdown ..."
+                    sleep 1
+                done
+                echo "Redis stopped"
+        fi
         ;;
-  restart)
-        restart
+    *)
+        echo "Please use start or stop as first argument"
         ;;
-  condrestart)
-        [ -e /var/lock/subsys/$prog ] && restart
-        RETVAL=$?
-        ;;
-  status)
-        status $prog
-        RETVAL=$?
-        ;;
-   *)
-        echo $"Usage: $0 {start|stop|restart|condrestart|status}"
-        RETVAL=1
 esac
-exit $RETVAL
 ```
 添加执行权限
 ```
 chmod +x /etc/init.d/redis
 ```
+注册服务
+```
+chkconfig --add redis
+```
+开机启动
+```
+chkconfig redis on
+```
 测试
 ```
 service redis start
 service redis stop
-```
-添加开机启动
-```
-chkconfig --add redis
 ```
 在使用 service redis start 可能会遇到该错误
 
