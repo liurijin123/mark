@@ -287,7 +287,7 @@ Nginx只需要安装到StorageServer所在的服务器即可，用于访问文�
 (1)gcc 安装
 ```
 # yum install gcc-c++
-``
+```
 (2)PCRE pcre-devel 安装
 ```
 # yum install -y pcre pcre-devel
