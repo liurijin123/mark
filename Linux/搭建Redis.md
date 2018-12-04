@@ -4,7 +4,8 @@
 ```
 # tar zxvf redis-3.0.7.tar.gz -C /usr/local/
 # cd /usr/local/
-# mv ./redis-3.0.7 ./redis
+# ln -sv redis-4.0.6/ redis
+# cd redis
 # make
 ```
 编译完成之后，可以看到解压文件redis中会有对应的src、conf等文件夹，这和windows下安装解压的文件一样，大部分安装包都会有对应的类文件、配置文件和一些命令文件。
@@ -17,7 +18,7 @@
 代码如下:
 ```
 mkdir -p /usr/local/redis/bin
-mkdir -p /usr/local/redis/ect
+mkdir -p /usr/local/redis/etc
 ```
 ### b)执行Linux文件移动命令：
 
