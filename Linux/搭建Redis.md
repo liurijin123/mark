@@ -127,8 +127,11 @@ dos2unix /etc/init.d/redis
 
 若redis无法重启，使用强制关闭
 >redis 强制关闭并重启方法
+
 >ps auxf|grep redis |grep -v grep|xargs kill -9 
+
 >/usr/local/bin/redis-server /etc/redis.conf
+
 >ps -ef | grep redis
 
 
