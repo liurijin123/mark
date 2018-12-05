@@ -100,7 +100,7 @@ chkconfig redis on
 service redis start
 service redis stop
 ```
-在使用 service redis start 可能会遇到该错误
+**在使用 service redis start 可能会遇到该错误**
 
 
 "env: /etc/init.d/redis: No such file or directory)"
@@ -119,7 +119,17 @@ dos2unix /etc/init.d/redis
 
 再使用service redis start 就没问题啦
 
+**在使用 service redis stop 可能会遇到该错误**
+```
+/var/run/redis.pid does not exist, process is not running
+```
+在redis.config中设置daemonize yes，然后重启
 
+若redis无法重启，使用强制关闭
+>redis 强制关闭并重启方法
+>ps auxf|grep redis |grep -v grep|xargs kill -9 
+>/usr/local/bin/redis-server /etc/redis.conf
+>ps -ef | grep redis
 
 
 
