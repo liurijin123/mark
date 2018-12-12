@@ -46,6 +46,10 @@ response.sendRedirect("url")
 	}
 ```
 Redirect重定向
+```
 return "redirect:/item/itemList.action";
+```
 forward转发
+```
 return "forward:/item/itemList.action";
+```
