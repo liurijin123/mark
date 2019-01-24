@@ -50,8 +50,30 @@ new ol.layer.Vector({
   })
 })
 ```
+## getPixelFromCoordinate返回null
+```
+/**
+         * 经纬度转换为屏幕像素
+         *
+         * @param {Array.<number>} geoCoord  经纬度
+         * @return {Array.<number>}
+         * @public
+         */
+        self.geoCoord2Pixel = function (geoCoord) {
+            var fromLonLat = ol.proj.fromLonLat(geoCoord);
+            //alert(fromLonLat);
+            var Pixe = self._map.getPixelFromCoordinate(fromLonLat);
+            //alert(Pixe);
+            return Pixe;
+        };
+```
 
-
+I'd be careful with this. You might get wrong results, e.g. when the map does not have the final layout yet. It is better to wait with the first coordinate to pixel conversion until the map is rendered. You do not need a timeout for this, we have the 'postrender' event on ol.Map. So in your initialisation code, you could do something like this:
+```
+map.once('postrender', function() {
+  // safe to call map.getPixelFromCoordinate from now on
+});
+```
 
 
 
