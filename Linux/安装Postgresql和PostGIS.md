@@ -56,7 +56,7 @@ shp2pgsql -W GBK -s 3857 ./demo.shp entry > demo.sql
 + ./demo.shp：.shp 文件的路径
 + entry：表示要导入的数据库表名——假设这个 .shp 文件表示的是各个入口，所以我命名为 “entry”
 + demo.sql
-
++ shp2pgsql -W UTF-8 -s 3857 ./lvyou.shp point > point.sql
 得到了 .sql 文件后，就可以直接导入到 PostgreSQL 数据库了。
 
 ## 8.创建一个 PostGIS 数据库
@@ -78,6 +78,12 @@ psql
 \d
 ```
 可以看到，.sql 文件已经被导入了。
+
+删除表
+```
+drop table table_name;
+```
+
 ## 9.设置数据库权限
 PostgreSQL 默认不对外开放权限，只对监听环回地址。要修改的话，需要找到 postgresql.conf 文件，修改值 listen_addresses：
 ```
