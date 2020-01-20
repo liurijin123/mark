@@ -1,4 +1,4 @@
-![](http://r.photo.store.qq.com/psb?/V12X9A3m33wlIQ/aXHU8V1jKmb.9ccuHJZ3xEkz.gJd*v5MpAS*9dRWLD4!/r/dGcBAAAAAAAA)
+![](http://img.liutong.fun/20200120095522.png)
 # Iterator接口
 Iterator接口，这是一个用于遍历集合中元素的接口，主要包含hashNext(),next(),remove()三种方法。它的一个子接口LinkedIterator在它的基础上又添加了三种
 方法，分别是add(),previous(),hasPrevious()。也就是说如果是先Iterator接口，那么在遍历集合中元素的时候，只能往后遍历，被遍历后的元素不会在遍历到，
@@ -8,7 +8,7 @@ Iterator接口，这是一个用于遍历集合中元素的接口，主要包含
 >List是元素有序并且可以重复的集合。
 >List的主要实现：ArrayList, LinkedList, Vector。
 ## 1.常用方法
-![](http://r.photo.store.qq.com/psb?/V12X9A3m33wlIQ/FXnrxrrpSvqxn3elzqtJbQYy7qZxe3LfkcTbJPRLlmc!/r/dDYBAAAAAAAA)
+![](http://img.liutong.fun/20200120095554.png)
 ## 2.ArrayList、LinkedList、Vector 的区别
 
 类型|ArrayList|LinkedList|Vector
@@ -24,7 +24,7 @@ Iterator接口，这是一个用于遍历集合中元素的接口，主要包含
 
 >Set的主要实现类：HashSet, TreeSet。
 ## 1.常用方法
-![](http://r.photo.store.qq.com/psb?/V12X9A3m33wlIQ/Fc0DNWUs1cv28XByICRULEyIqNaZ6Bv5H0529TQozZc!/r/dFIBAAAAAAAA)
+![](http://img.liutong.fun/20200120095705.png)
 ## 2.区别
 
 类型|HashSet|TreeSet|LinkedHashSet
@@ -55,7 +55,7 @@ hashCode()的默认行为是对堆上的对象产生独特值。如果没有重�
 
 >Map 的常用实现类：HashMap、TreeMap、HashTable、LinkedHashMap、ConcurrentHashMap
 ## 1.常用方法
-![](http://r.photo.store.qq.com/psb?/V12X9A3m33wlIQ/LAQxKtHpfiLrGN0jGGeiHM4MKbJSbBahxu8qk91AKOI!/r/dPMAAAAAAAAA)
+![](http://img.liutong.fun/20200120095731.png)
 ## 2.区别
 
 类型|HashMap|HashTable
