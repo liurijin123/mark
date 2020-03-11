@@ -170,6 +170,7 @@ public @interface Service {
 + @Service用于标注服务层组件,表示定义一个bean
 + @Service使用时没有传参数，Bean名称默认为当前类的类名，首字母小写
 + @Service(“serviceBeanId”)或@Service(value=”serviceBeanId”)使用时传参数，使用value作为Bean名字
+
 **@Scope作用域注解**
 
 @Scope作用在类上和方法上，用来配置 spring bean 的作用域，它标识 bean 的作用域
@@ -208,10 +209,6 @@ proxyMode
     INTERFACES      使用基于接口的代理(jdk dynamic proxy)。
     TARGET_CLASS    使用基于类的代理(cglib)。
 ```
-**@Entity实体类注解**
-
-@Table(name ="数据库表名")，这个注解也注释在实体类上，对应数据库中相应的表。
-@Id、@Column注解用于标注实体类中的字段，pk字段标注为@Id，其余@Column。
 
 **@Bean产生一个bean的方法**
 
@@ -227,6 +224,8 @@ proxyMode
 把普通pojo实例化到spring容器中，相当于配置文件中的
 
 虽然有了@Autowired,但是我们还是要写一堆bean的配置文件,相当麻烦,而@Component就是告诉spring,我是pojo类,把我注册到容器中吧,spring会自动提取相关信息。那么我们就不用写麻烦的xml配置文件了
+
+**@Inject：**等价于默认的 @Autowired，只是没有 required 属性；
 
 ## 五、导入配置文件
 
@@ -305,8 +304,41 @@ public class GlobalExceptionHandler {
     }
 }
 ```
+## 八、JPA 注解
+**@Entity：**@Table(name="")：表明这是一个实体类。一般用于 jpa 这两个注解一般一块使用，但是如果表名和实体类名相同的话，@Table 可以省略
 
+**@MappedSuperClass: **用在确定是父类的 entity 上。父类的属性子类可以继承。
 
+**@NoRepositoryBean:** 一般用作父类的 repository，有这个注解，spring 不会去实例化该 repository。
+
+**@Column：**如果字段名与列名相同，则可以省略。
+
+**@Id：**表示该属性为主键。
+
+**@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "repairseq")：**表示主键生成策略是 sequence（可以为 Auto、IDENTITY、native 等，Auto 表示可在多个数据库间切换），指定 sequence 的名字是 repairseq。
+
+**@SequenceGeneretor(name = "repairseq", sequenceName = "seqrepair", allocationSize = 1)：**name 为 sequence 的名称，以便使用，sequenceName 为数据库的 sequence 名称，两个名称可以一致。
+
+**@Transient：**表示该属性并非一个到数据库表的字段的映射, ORM 框架将忽略该属性。如果一个属性并非数据库表的字段映射, 就务必将其标示为 @Transient, 否则, ORM 框架默认其注解为 @Basic。@Basic(fetch=FetchType.LAZY)：标记可以指定实体属性的加载方式
+
+**@JsonIgnore：**作用是 json 序列化时将 Java bean 中的一些属性忽略掉, 序列化和反序列化都受影响。
+
+**@JoinColumn（name="loginId"）:** 一对一：本表中指向另一个表的外键。一对多：另一个表指向本表的外键。
+
+**@OneToOne、@OneToMany、@ManyToOne：**对应 hibernate 配置文件中的一对一，一对多，多对一。
+## 九、切面（AOP）相关注解
+
+Spring支持AspectJ的注解式切面编程。
+
+**@Aspect** 声明一个切面（类上）
+使用@After、@Before、@Around定义建言（advice），可直接将拦截规则（切点）作为参数。
+
+**@After** 在方法执行之后执行（方法上）
+**@Before** 在方法执行之前执行（方法上）
+**@Around** 在方法执行之前与之后执行（方法上）
+
+**@PointCut** 声明切点
+在java配置类中使用@EnableAspectJAutoProxy注解开启Spring对AspectJ代理的支持（类上）
 
 
 
