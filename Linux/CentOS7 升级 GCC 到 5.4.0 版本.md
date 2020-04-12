@@ -18,13 +18,13 @@ cd gcc-5.4.0
 ```
 
 如果网速不好，可以使用这个地址下载
->https://github.com/liurijin123/save/blob/master/gmp-4.3.2.tar.bz2
+>https://github.com/liurijin123/save/raw/master/gmp-4.3.2.tar.bz2
 
->https://github.com/liurijin123/save/blob/master/mpc-0.8.1.tar.gz
+>https://github.com/liurijin123/save/raw/master/mpc-0.8.1.tar.gz
 
->https://github.com/liurijin123/save/blob/master/isl-0.14.tar.bz2
+>https://github.com/liurijin123/save/raw/master/isl-0.14.tar.bz2
 
->https://github.com/liurijin123/save/blob/master/mpfr-2.4.2.tar.bz2
+>https://github.com/liurijin123/save/raw/master/mpfr-2.4.2.tar.bz2
 
 然后自行修改./contrib/download_prerequisites文件后执行上述命令
 ### 建立一个文件夹存放编译的文件
