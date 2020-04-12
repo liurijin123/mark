@@ -128,11 +128,11 @@ git clone --recursive https://github.com/named-data-ndnSIM/ndnSIM.git ns-3/src/n
 ### 1.4 编译并运行ndnSIM
 
 ndnSIM使用标准的NS-3编译过程。 通常，以下命令应足以配置和构建启用了python绑定的ndnSIM：
-
-cd /ndnSIM
+```
+cd /ndnSIM/ns-3/
 ./waf configure --enable-examples
 ./waf
-
+```
 ### 1.5 使用ndnSIM进行仿真
 
 #### 示例模拟场景
